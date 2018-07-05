@@ -7,8 +7,6 @@ const router = express.Router();
 var shortid = require('shortid');
 const port = process.env.PORT || 3000;
 
-
-
 let event1 = {
   "id": shortid.generate(),
   "title": "Volleyball",
@@ -36,7 +34,6 @@ let events = {
   "3": event3
 }
 
-// ES6 Arrow function
 app.use(router);
 app.get('/events', (req, res) => res.send(events));
 
@@ -63,9 +60,9 @@ app.post('/events', function(req, res) {
 app.patch('/events/:id', function(req, res) {
   if(req.params.id in events) {
     if(req.body.title) {
-      events[req.params.id]["title"] = req.body.title;
+        events[req.params.id]["title"] = req.body.title;
     } else if(req.body.description) {
-      events[req.params.id]["description"] = req.body.description;
+        events[req.params.id]["description"] = req.body.description;
     } else if(req.body.date) {
         events[req.params.id]["date"] = req.body.date;
     }
@@ -78,9 +75,6 @@ app.patch('/events/:id', function(req, res) {
 app.delete('/events/:id', function(req, res) {
   if(req.params.id in events) {
     delete events[req.params.id]
-
-    console.log(Object.keys(events).length)
-    //console.log(events)
       res.send(events);
   } else {
     res.send(404)
@@ -89,16 +83,3 @@ app.delete('/events/:id', function(req, res) {
 
 app.listen(port);
 console.log('Example app listening on port ' + port);
-
-
-
-
-
-
-
-
-
-
-
-
-//
