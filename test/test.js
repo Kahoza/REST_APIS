@@ -39,4 +39,21 @@ describe('Endpoint', function() {
         done();
       });
     });
+
+    it('should test if the patch endpoint for an event works', function(done) {
+      chai.request('http://localhost:3000')
+      .patch('/events/3')
+      .send({
+        '_method': 'put',
+        'id': 'idtest2u8374y3',
+        'title': 'new event title',
+        'description': 'new event description',
+        'date': '12-09-2022'
+      })
+      .end(function(err, res) {
+        expect(res).to.have.status(200);
+        expect(err).to.be.null
+        done();
+      });
+    });
 });
