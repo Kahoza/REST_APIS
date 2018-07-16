@@ -29,4 +29,14 @@ describe('Endpoint', function() {
         'date': '12-09-2020'
       });
     });
+
+    it('should test the endpoint that returns an event with an id', function(done) {
+      chai.request('http://localhost:3000')
+      .get('/events/2')
+      .end(function(err, res) {
+        expect(res).to.have.status(200);
+        expect(err).to.be.null
+        done();
+      });
+    });
 });
