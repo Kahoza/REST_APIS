@@ -1,6 +1,6 @@
-var chai = require('chai');
-var expect = chai.expect;
-var chaiHttp = require('chai-http');
+var chai = require('chai'),
+    expect = chai.expect,
+    chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 describe('Endpoint', function() {
@@ -18,7 +18,7 @@ describe('Endpoint', function() {
         });
     });
 
-    it('should use chai http request to create an event', function() {
+    it('should use chai http request to create an event', function(done) {
       chai.request('http://localhost:3000')
       .post('/events')
       .send({
@@ -27,6 +27,11 @@ describe('Endpoint', function() {
         'title': 'test event title',
         'description': 'test event description',
         'date': '12-09-2020'
+      })
+      .end(function(err, res) {
+        expect(res).to.have.status(200);
+        expect(err).to.be.null
+        done();
       });
     });
 
@@ -59,7 +64,7 @@ describe('Endpoint', function() {
 
     it('should test if the delete enpoint works', function(done) {
       chai.request('http://localhost:3000')
-      .delete('/events/2')
+      .delete('/events/1')
       .end(function(err, res) {
         expect(res).to.have.status(200);
         expect(err).to.be.null
