@@ -56,4 +56,14 @@ describe('Endpoint', function() {
         done();
       });
     });
+
+    it('should test if the delete enpoint works', function(done) {
+      chai.request('http://localhost:3000')
+      .delete('/events/2')
+      .end(function(err, res) {
+        expect(res).to.have.status(200);
+        expect(err).to.be.null
+        done();
+      });
+    });
 });
